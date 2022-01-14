@@ -1,0 +1,17 @@
+{
+    "name": "minvws/horsebattery",
+    "description": "A password generator inspired by https://xkcd.com/936/",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Minvws\\Horsebattery\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Joshua Thijsse",
+            "email": "jthijssen@noxlogic.nl"
+        }
+    ],
+    "require": {}
+}
