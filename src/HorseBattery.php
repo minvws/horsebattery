@@ -1,11 +1,11 @@
 <?php
 
-namespace Minvws\Horsebattery;
+namespace Minvws\HorseBattery;
 
-use Minvws\Horsebattery\Exception\PasswordGenerationException;
-use Minvws\Horsebattery\Exception\WordCountTooShort;
-use Minvws\Horsebattery\Exception\WordListFileNotFound;
-use Minvws\Horsebattery\Exception\WordListTooShort;
+use Minvws\HorseBattery\Exception\PasswordGenerationException;
+use Minvws\HorseBattery\Exception\WordCountTooShort;
+use Minvws\HorseBattery\Exception\WordListFileNotFound;
+use Minvws\HorseBattery\Exception\WordListTooShort;
 
 final class HorseBattery implements PasswordGenerator
 {
