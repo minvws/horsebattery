@@ -1,11 +1,11 @@
 <?php
 
-namespace Minvws\Horsebattery\Tests;
+namespace Minvws\HorseBattery\Tests;
 
-use Minvws\Horsebattery\Exception\WordCountTooShort;
-use Minvws\Horsebattery\Exception\WordListFileNotFound;
-use Minvws\Horsebattery\Exception\WordListTooShort;
-use Minvws\Horsebattery\HorseBattery;
+use Minvws\HorseBattery\Exception\WordCountTooShort;
+use Minvws\HorseBattery\Exception\WordListFileNotFound;
+use Minvws\HorseBattery\Exception\WordListTooShort;
+use Minvws\HorseBattery\HorseBattery;
 use PHPUnit\Framework\TestCase;
 
 final class HorseBatteryTest extends TestCase
@@ -36,7 +36,7 @@ final class HorseBatteryTest extends TestCase
     public function failsForWordListNotFound(): void
     {
         $this->expectException(WordListFileNotFound::class);
-        new Horsebattery('wakanda');
+        new HorseBattery('wakanda');
     }
 
     /**

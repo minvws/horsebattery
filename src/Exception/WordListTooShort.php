@@ -1,6 +1,6 @@
 <?php
 
-namespace Minvws\Horsebattery\Exception;
+namespace Minvws\HorseBattery\Exception;
 
 final class WordListTooShort extends \Exception implements PasswordGenerationException
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Minvws\Horsebattery;
+namespace Minvws\HorseBattery;
 
 interface PasswordGenerator
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Minvws\Horsebattery\Exception;
+namespace Minvws\HorseBattery\Exception;
 
 final class WordCountTooShort extends \Exception implements PasswordGenerationException
 {
