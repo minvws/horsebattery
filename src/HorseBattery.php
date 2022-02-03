@@ -30,7 +30,7 @@ final class HorseBattery implements PasswordGenerator
         }
     }
 
-    public function generate(int $wordCount = self::DEFAULT_WORD_COUNT): string
+    public function generate(?int $wordCount = self::DEFAULT_WORD_COUNT): string
     {
         if ($wordCount < self::MIN_WORD_COUNT) {
             throw WordCountTooShort::forMinimum(self::MIN_WORD_COUNT);
