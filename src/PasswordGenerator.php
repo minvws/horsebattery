@@ -4,5 +4,5 @@ namespace Minvws\HorseBattery;
 
 interface PasswordGenerator
 {
-    public function generate(?int $count): string;
+    public function generate(?int $count = null): string;
 }
