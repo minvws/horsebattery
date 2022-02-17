@@ -7,7 +7,7 @@ use Minvws\HorseBattery\Exception\WordCountTooShort;
 use Minvws\HorseBattery\Exception\WordListFileNotFound;
 use Minvws\HorseBattery\Exception\WordListTooShort;
 
-final class HorseBattery implements PasswordGenerator
+class HorseBattery implements PasswordGenerator
 {
     /** @var array<string> */
     private $wordlist;
@@ -21,16 +21,16 @@ final class HorseBattery implements PasswordGenerator
     /**
      * @throws PasswordGenerationException
      */
-    public function __construct(?string $locale = self::DEFAULT_LOCALE, string ...$wordlist)
+    public function __construct(?string $locale = self::DEFAULT_LOCALE, array $wordlist = null)
     {
-        $this->wordlist = $wordlist === [] ? $this->getDefaultWordList($locale) : $wordlist;
+        $this->wordlist = $wordlist ?? $this->getDefaultWordList($locale ?? "");
 
         if (count($this->wordlist) < self::MIN_WORD_LIST_COUNT) {
             throw WordListTooShort::forMinimum(self::MIN_WORD_LIST_COUNT);
         }
     }
 
-    public function generate(?int $wordCount = self::DEFAULT_WORD_COUNT): string
+    public function generate(?int $wordCount = self::DEFAULT_WORD_COUNT, string $separator = null): string
     {
         if ($wordCount < self::MIN_WORD_COUNT) {
             throw WordCountTooShort::forMinimum(self::MIN_WORD_COUNT);
@@ -38,25 +38,25 @@ final class HorseBattery implements PasswordGenerator
 
         $length = count($this->wordlist);
 
-        $pw = '';
+        $pw = [];
         for ($i = 1; $i <= $wordCount; $i++) {
             $plain = false;
             while (!$plain) {
                 $key = random_int(0, $length - 1);
                 if ((preg_match("/^[a-zA-Z0-9\-]+$/", $this->wordlist[$key]) == 1)) {
                     $plain = true;
-                    $pw = $pw . ucwords($this->wordlist[$key]);
+                    $pw[] = ucwords($this->wordlist[$key]);
                 }
             }
         }
 
-        return $pw;
+        return join($separator ?? "", $pw);
     }
 
     /**
      * @throws PasswordGenerationException
      */
-    private function getDefaultWordList(string $locale): array
+    protected function getDefaultWordList(string $locale): array
     {
         $parentDir = dirname(__DIR__, 1);
         $path = realpath(sprintf(self::DEFAULT_WORD_LIST_PATH, $parentDir, $locale));
