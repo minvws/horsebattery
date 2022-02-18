@@ -5,7 +5,7 @@ Provides a default word list in Dutch and will generate a password based on
 the wordlist and a given number of words.
 
 May be expanded to include other locales in the future or configuration to 
-allow for other w ord lists.
+allow for other word lists.
 
 ## Requirements
 - PHP >= 8.0
