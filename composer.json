@@ -2,6 +2,12 @@
     "name": "minvws/horsebattery",
     "description": "A password generator inspired by https://xkcd.com/936/",
     "type": "library",
+    "keywords": [
+      "security",
+      "password",
+      "generator",
+    ],
+    "license": "EUPL-1.2",
     "autoload": {
         "psr-4": {
             "Minvws\\HorseBattery\\": "src/"
