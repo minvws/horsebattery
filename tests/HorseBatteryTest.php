@@ -72,4 +72,15 @@ final class HorseBatteryTest extends TestCase
         $this->assertEquals('Foo-Foo-Foo', $hb->generate(3, '-'));
         $this->assertEquals('Foo-x--Foo-x--Foo', $hb->generate(3, '-x--'));
     }
+
+    /**
+     * @test
+     */
+    public function directoryTraversalIssue(): void
+    {
+        $this->expectException(WordListFileNotFound::class);
+        $this->expectErrorMessage("Default wordlist detected out of config directory");
+        $hb = new HorseBattery("../tests");
+        $hb->generate(2);
+    }
 }

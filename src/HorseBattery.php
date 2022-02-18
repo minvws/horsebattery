@@ -13,7 +13,7 @@ class HorseBattery implements PasswordGenerator
     private $wordlist;
 
     private const DEFAULT_LOCALE = 'nl';
-    private const DEFAULT_WORD_LIST_PATH = '%s/config/%s/word-list.txt';
+    private const DEFAULT_WORD_LIST_PATH = '%s/%s/word-list.txt';
     private const DEFAULT_WORD_COUNT = 4;
     private const MIN_WORD_LIST_COUNT = 9000;
     private const MIN_WORD_COUNT = 1;
@@ -58,8 +58,13 @@ class HorseBattery implements PasswordGenerator
      */
     protected function getDefaultWordList(string $locale): array
     {
-        $parentDir = dirname(__DIR__, 1);
+        $parentDir = dirname(__DIR__, 1) . "/config/";
         $path = realpath(sprintf(self::DEFAULT_WORD_LIST_PATH, $parentDir, $locale));
+
+        // Directory traversal issue detected
+        if ($path && !str_starts_with($path, $parentDir)) {
+            throw WordListFileNotFound::notAllowedOutOfConfigDir();
+        }
 
         if (!$path || !$wordlist = file($path, FILE_IGNORE_NEW_LINES)) {
             throw WordListFileNotFound::forLocale(self::DEFAULT_LOCALE);
