@@ -2,11 +2,11 @@
 
 namespace Minvws\HorseBattery\Exception;
 
-final class WordListTooShort extends \Exception implements PasswordGenerationException
+class WordListTooShort extends \Exception implements PasswordGenerationException
 {
     public static function forMinimum(int $minWords): self
     {
-        return new static(sprintf(
+        return new self(sprintf(
             'Could not initialize password generator: word list must have at least %d words',
             $minWords
         ));

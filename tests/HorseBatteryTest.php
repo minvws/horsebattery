@@ -19,7 +19,7 @@ final class HorseBatteryTest extends TestCase
         $hb = new HorseBattery();
         $result = $hb->generate($wordCount);
 
-        $words = array_filter(preg_split('/(?=[A-Z])/',$result), null);
+        $words = array_filter(preg_split('/(?=[A-Z])/', $result), null);
         $this->assertCount($wordCount, $words);
     }
 
@@ -45,7 +45,7 @@ final class HorseBatteryTest extends TestCase
     public function failsForWordListTooShort(): void
     {
         $this->expectException(WordListTooShort::class);
-        new HorseBattery(null, 'lorem', 'ipsum', 'donut', 'sith', 'amen');
+        new HorseBattery(null, [ 'lorem', 'ipsum', 'donut', 'sith', 'amen' ]);
     }
 
     /**
@@ -56,5 +56,20 @@ final class HorseBatteryTest extends TestCase
         $this->expectException(WordCountTooShort::class);
         $hb = new HorseBattery();
         $hb->generate(0);
+    }
+
+    /**
+     * @test
+     */
+    public function generatesPasswordsWithSeparators(): void
+    {
+        $wordlist = [];
+        for ($i = 0; $i != 10000; $i++) {
+            $wordlist[] = "foo";
+        }
+        $hb = new HorseBattery('NL', $wordlist);
+
+        $this->assertEquals('Foo-Foo-Foo', $hb->generate(3, '-'));
+        $this->assertEquals('Foo-x--Foo-x--Foo', $hb->generate(3, '-x--'));
     }
 }
