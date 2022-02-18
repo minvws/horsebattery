@@ -642,6 +642,7 @@ basiskennis
 basisscholen
 basisschool
 baten
+batterij
 be
 beantwoord
 beantwoordde
