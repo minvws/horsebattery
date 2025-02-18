@@ -1,4 +1,3 @@
-# The LAST matching line takes precedence.
-
-* @minvws/brba-php-codeowners
+* @minvws/icore-codeowners-base
+# Last match takes precedence
 .github/CODEOWNERS @minvws/irealisatie-operations
