@@ -21,7 +21,7 @@ class HorseBattery implements PasswordGenerator
     /**
      * @throws PasswordGenerationException
      */
-    public function __construct(?string $locale = self::DEFAULT_LOCALE, array $wordlist = null)
+    public function __construct(?string $locale = self::DEFAULT_LOCALE, ?array $wordlist = null)
     {
         $this->wordlist = $wordlist ?? $this->getDefaultWordList($locale ?? "");
 
@@ -30,7 +30,7 @@ class HorseBattery implements PasswordGenerator
         }
     }
 
-    public function generate(?int $wordCount = self::DEFAULT_WORD_COUNT, string $separator = null): string
+    public function generate(?int $wordCount = self::DEFAULT_WORD_COUNT, ?string $separator = null): string
     {
         if ($wordCount < self::MIN_WORD_COUNT) {
             throw WordCountTooShort::forMinimum(self::MIN_WORD_COUNT);
