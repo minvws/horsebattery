@@ -8,7 +8,7 @@ May be expanded to include other locales in the future or configuration to
 allow for other word lists.
 
 ## Requirements
-- PHP >= 8.1
+- PHP >= 8.3
 - Composer
 
 ## Installation

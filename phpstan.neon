@@ -1,8 +1,9 @@
-parameters:
-    paths:
-        - src
-    level: 8
-    inferPrivatePropertyTypeFromConstructor: true
-    checkMissingIterableValueType: false
-    reportUnmatchedIgnoredErrors: false
+includes:
+    - phpstan-baseline.neon
 
+parameters:
+    level: max
+    paths:
+        - src/
+        - tests/
+        - config/
