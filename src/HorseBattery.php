@@ -12,11 +12,11 @@ class HorseBattery implements PasswordGenerator
     /** @var array<string> */
     private $wordlist;
 
-    private const DEFAULT_LOCALE = 'nl';
-    private const DEFAULT_WORD_LIST_PATH = '%s/%s/word-list.txt';
-    private const DEFAULT_WORD_COUNT = 4;
-    private const MIN_WORD_LIST_COUNT = 9000;
-    private const MIN_WORD_COUNT = 1;
+    private const string DEFAULT_LOCALE = 'nl';
+    private const string DEFAULT_WORD_LIST_PATH = '%s/%s/word-list.txt';
+    private const int DEFAULT_WORD_COUNT = 4;
+    private const int MIN_WORD_LIST_COUNT = 9000;
+    private const int MIN_WORD_COUNT = 1;
 
     /**
      * @throws PasswordGenerationException

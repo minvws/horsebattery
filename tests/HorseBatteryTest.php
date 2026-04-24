@@ -6,15 +6,13 @@ use Minvws\HorseBattery\Exception\WordCountTooShort;
 use Minvws\HorseBattery\Exception\WordListFileNotFound;
 use Minvws\HorseBattery\Exception\WordListTooShort;
 use Minvws\HorseBattery\HorseBattery;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class HorseBatteryTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider expectedResultProvider
-     */
-    public function generatesExpectedResult(int $wordCount): void
+    #[DataProvider('expectedResultProvider')]
+    public function testGeneratesExpectedResult(int $wordCount): void
     {
         $hb = new HorseBattery();
         $result = $hb->generate($wordCount);
@@ -23,45 +21,33 @@ final class HorseBatteryTest extends TestCase
         $this->assertCount($wordCount, $words);
     }
 
-    public function expectedResultProvider(): array
+    public static function expectedResultProvider(): array
     {
         return [
             [1], [2], [3], [4], [20]
         ];
     }
 
-    /**
-     * @test
-     */
-    public function failsForWordListNotFound(): void
+    public function testFailsForWordListNotFound(): void
     {
         $this->expectException(WordListFileNotFound::class);
         new HorseBattery('wakanda');
     }
 
-    /**
-     * @test
-     */
-    public function failsForWordListTooShort(): void
+    public function testFailsForWordListTooShort(): void
     {
         $this->expectException(WordListTooShort::class);
         new HorseBattery(null, [ 'lorem', 'ipsum', 'donut', 'sith', 'amen' ]);
     }
 
-    /**
-     * @test
-     */
-    public function failsForWordCountTooShort(): void
+    public function testFailsForWordCountTooShort(): void
     {
         $this->expectException(WordCountTooShort::class);
         $hb = new HorseBattery();
         $hb->generate(0);
     }
 
-    /**
-     * @test
-     */
-    public function generatesPasswordsWithSeparators(): void
+    public function testGeneratesPasswordsWithSeparators(): void
     {
         $wordlist = [];
         for ($i = 0; $i != 10000; $i++) {
@@ -73,13 +59,10 @@ final class HorseBatteryTest extends TestCase
         $this->assertEquals('Foo-x--Foo-x--Foo', $hb->generate(3, '-x--'));
     }
 
-    /**
-     * @test
-     */
-    public function directoryTraversalIssue(): void
+    public function testDirectoryTraversalIssue(): void
     {
         $this->expectException(WordListFileNotFound::class);
-        $this->expectErrorMessage("Default wordlist detected out of config directory");
+        $this->expectExceptionMessage("Default wordlist detected out of config directory");
         $hb = new HorseBattery("../tests");
         $hb->generate(2);
     }
